@@ -25,6 +25,7 @@ namespace MatchCard
         private readonly List<CardController> _flippedCards = new();
         public int Score => score;
         public int Turns => turns;
+        
         public static event System.Action<float> OnTimeChanged;
         public static event System.Action OnGameOver;
         // Start is called before the first frame update
@@ -32,6 +33,7 @@ namespace MatchCard
         public void StartGame()
         {
             _remainingTime = _gameDuration;
+            _isGameOver = false;
             LoadGameData();
             _cards.Clear();
             CreateCards();
