@@ -16,7 +16,10 @@ namespace MatchCard
             _button.onClick.AddListener(() => onClick.Invoke());
             ShowBack();
         }
-
+        public void SetButtonInteractability(bool value)
+        {
+            _button.interactable = value;
+        }
         public void ShowFront() { _front.SetActive(true); _back.SetActive(false); }
         public void ShowBack() { _front.SetActive(false); _back.SetActive(true); }
     }

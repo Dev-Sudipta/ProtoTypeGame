@@ -69,6 +69,7 @@ namespace MatchCard
             {
                 Debug.Log("Show front");
                 card.view.ShowFront();
+                card.view.SetButtonInteractability(false);
             }
 
             yield return new WaitForSeconds(previewTime);
@@ -76,6 +77,7 @@ namespace MatchCard
             foreach (var card in _cards)
             {
                 card.FlipDown();
+                card.view.SetButtonInteractability(true);
             }
 
             ShuffleCards();
