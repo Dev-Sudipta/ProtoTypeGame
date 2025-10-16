@@ -1142,8 +1142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a377b77ad7cd9408d849087e048318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLayout: {fileID: 1671805702}
-  spacing: 5
+  _gridLayout: {fileID: 0}
+  _spacing: 8
 --- !u!1 &1911701834
 GameObject:
   m_ObjectHideFlags: 0

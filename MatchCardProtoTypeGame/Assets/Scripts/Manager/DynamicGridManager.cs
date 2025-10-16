@@ -6,13 +6,13 @@ namespace MatchCard
 {
     public class DynamicGridManager : MonoBehaviour
     {
-        public GridLayoutGroup gridLayout;
-        public float spacing = 5f;
+        [SerializeField] private  GridLayoutGroup _gridLayout;
+        [SerializeField] private float _spacing;
 
         void Awake()
         {
-            if (gridLayout == null)
-                gridLayout = GetComponent<GridLayoutGroup>();
+            if (_gridLayout == null)
+                _gridLayout = GetComponent<GridLayoutGroup>();
         }
 
 
@@ -21,16 +21,16 @@ namespace MatchCard
             int rows = Mathf.FloorToInt(Mathf.Sqrt(cardCount));
             int columns = Mathf.CeilToInt((float)cardCount / rows);
 
-            RectTransform rt = gridLayout.GetComponent<RectTransform>();
+            RectTransform rt = _gridLayout.GetComponent<RectTransform>();
 
-            float totalWidth = rt.rect.width - gridLayout.padding.left - gridLayout.padding.right - spacing * (columns - 1);
-            float totalHeight = rt.rect.height - gridLayout.padding.top - gridLayout.padding.bottom - spacing * (rows - 1);
+            float totalWidth = rt.rect.width - _gridLayout.padding.left - _gridLayout.padding.right - _spacing * (columns - 1);
+            float totalHeight = rt.rect.height - _gridLayout.padding.top - _gridLayout.padding.bottom - _spacing * (rows - 1);
 
             float cellWidth = totalWidth / columns;
             float cellHeight = totalHeight / rows;
 
-            gridLayout.cellSize = new Vector2(cellWidth, cellHeight);
-            gridLayout.spacing = new Vector2(spacing, spacing);
+            _gridLayout.cellSize = new Vector2(cellWidth, cellHeight);
+            _gridLayout.spacing = new Vector2(_spacing, _spacing);
         }
 
     }
