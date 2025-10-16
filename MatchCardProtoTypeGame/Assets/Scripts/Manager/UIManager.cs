@@ -96,6 +96,9 @@ namespace MatchCard
             GameManager.OnGameOver -= ShowGameOver;
             GameManager.OnTimeChanged -= UpdateTimer;
             _gameManager.OnGameWonEvent -= ShowGameWon;
+            _playButton.onClick.RemoveListener(StartGame);
+            _reloadButton.onClick.RemoveListener(ReloadGame);
+            _restartButton.onClick.RemoveListener(ReloadGame);
         }
     }
 
