@@ -24,7 +24,7 @@ namespace MatchCard
         void Start()
         {
             ShowMenu();
-
+            SoundManager.Instance.PlayBackgroundMusic();
             _playButton.onClick.AddListener(StartGame);
             _reloadButton.onClick.AddListener(ReloadGame);
             _restartButton.onClick.AddListener(ReloadGame);
@@ -62,6 +62,7 @@ namespace MatchCard
         }
         void ShowGameOver()
         {
+            SoundManager.Instance.PauseBackgroundMusic();
             StartCoroutine(GameOver());
             _menuPage.SetActive(false);
             _gameWonPage.SetActive(false);
@@ -69,6 +70,7 @@ namespace MatchCard
         }
         void ShowGameWon()
         {
+            SoundManager.Instance.PauseBackgroundMusic();
             StartCoroutine(GameWin());
             _menuPage.SetActive(false);
             _gameOverPage.SetActive(false);
@@ -87,7 +89,7 @@ namespace MatchCard
         private IEnumerator GameOver()
         {
             yield return new WaitForSeconds(1.5f);
-            Debug.Log("Coroutine called");
+            
             SoundManager.Instance.PlayGameOverSound();
             _gameplayPage.SetActive(false);
             _gameOverPage.SetActive(true);
@@ -100,6 +102,7 @@ namespace MatchCard
 
         public void ReloadGame()
         {
+            SoundManager.Instance.PlayBackgroundMusic();
             _gameManager.ClearCards();
             _gameManager.StartGame();
             _gameplayPage.SetActive(true);

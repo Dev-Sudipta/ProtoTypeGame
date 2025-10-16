@@ -48,6 +48,7 @@ namespace MatchCard
             if (_remainingTime <= 0f)
             {
                 _remainingTime = 0f;
+                _isGameOver = true;
                 OnGameOver?.Invoke();
             }
         }
