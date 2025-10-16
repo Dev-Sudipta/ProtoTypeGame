@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +15,14 @@ namespace MatchCard
         private List<CardController> _cards = new List<CardController>();
         private CardController _firstCard, _secondCard;
         public event System.Action OnGameWonEvent;
+        private bool _isPreviewing = true;
         // Start is called before the first frame update
-        private void Start()
-        {
-            CreateCards();
-        }
 
         public void StartGame()
         {
             _cards.Clear();
             CreateCards();
+            StartCoroutine(PreviewAndShuffleRoutine(0.5f));
         }
 
         public void ClearCards()
@@ -64,8 +62,41 @@ namespace MatchCard
                 _cards.Add(controller);
             }
         }
+        private IEnumerator PreviewAndShuffleRoutine(float previewTime)
+        {
+            
+            foreach (var card in _cards)
+            {
+                Debug.Log("Show front");
+                card.view.ShowFront();
+            }
+
+            yield return new WaitForSeconds(previewTime);
+
+            foreach (var card in _cards)
+            {
+                card.FlipDown();
+            }
+
+            ShuffleCards();
+
+            _isPreviewing = false;
+        }
+
+        private void ShuffleCards()
+        {
+            ShuffleUtility.Shuffle(_cards);
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                _cards[i].view.transform.SetSiblingIndex(i);
+            }
+        }
+
+       
+
         private void OnCardSelected(CardController selected)
         {
+            if (_isPreviewing) return;
             if (_firstCard == null)
             {
                 _firstCard = selected;
