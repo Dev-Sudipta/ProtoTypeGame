@@ -1,3 +1,9 @@
+
+# Visual Studio
+.vs/
+*.db
+*.db-wal
+*.db-shm
 # Unity generated folders
 [Ll]ibrary/
 [Tt]emp/
