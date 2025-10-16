@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace MatchCard
 {
@@ -16,13 +17,19 @@ namespace MatchCard
         private CardController _firstCard, _secondCard;
         public event System.Action OnGameWonEvent;
         private bool _isPreviewing = true;
+        private int score;
+        private int turns;
+        public int Score => score;
+        public int Turns => turns;  
         // Start is called before the first frame update
 
         public void StartGame()
         {
+            LoadGameData();
             _cards.Clear();
             CreateCards();
             StartCoroutine(PreviewAndShuffleRoutine(0.5f));
+            UIManager.OncardFlip?.Invoke(score);
         }
 
         public void ClearCards()
@@ -32,7 +39,18 @@ namespace MatchCard
             _cards.Clear();
         }
 
+        private void LoadGameData()
+        {
+            GameData data = GameDataSaveManager.Load();
+            score = data.score;
+            Debug.Log($"Loaded Score: {score}, Turns: {turns}");
+        }
 
+        private void SaveGameData()
+        {
+            GameData data = new GameData { score = score };
+            GameDataSaveManager.Save(data);
+        }
         void CreateCards()
         {
             int[] possibleCounts = { 4, 6, 12 };
@@ -118,6 +136,9 @@ namespace MatchCard
             {
                 _firstCard.SetMatched();
                 _secondCard.SetMatched();
+                score += 10;
+                UIManager.OncardFlip?.Invoke(score);
+                SaveGameData();
             }
             else
             {
@@ -127,7 +148,7 @@ namespace MatchCard
 
             _firstCard = null;
             _secondCard = null;
-
+           
             if (_cards.TrueForAll(c => c.model.isMatched))
             {
                 Debug.Log("You Won!");
