@@ -7,19 +7,100 @@ namespace MatchCard
    
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private DynamicGridManager _dynamicGridManager;        // Start is called before the first frame update
-        void Start()
+        [SerializeField] private Transform _gridParent;
+        [SerializeField] private CardView _cardPrefab;
+        [SerializeField] private Sprite[] _cardSprites;
+        [SerializeField] private DynamicGridManager _dynamicGridManager;
+
+        private List<CardController> _cards = new List<CardController>();
+        private CardController _firstCard, _secondCard;
+        public event System.Action OnGameWonEvent;
+        // Start is called before the first frame update
+        private void Start()
         {
-            int[] possibleCounts = { 4, 6, 30 };
-            int cardCount = possibleCounts[Random.Range(0, possibleCounts.Length)];
-            Debug.Log(cardCount);
-            _dynamicGridManager.SetupGrid(cardCount);
+            CreateCards();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void StartGame()
         {
-        
+            _cards.Clear();
+            CreateCards();
+        }
+
+        public void ClearCards()
+        {
+            foreach (Transform child in _gridParent)
+                Destroy(child.gameObject);
+            _cards.Clear();
+        }
+
+
+        void CreateCards()
+        {
+            int[] possibleCounts = { 4, 6, 12 };
+            int cardCount = possibleCounts[Random.Range(0, possibleCounts.Length)];
+
+            List<CardData> dataList = new List<CardData>();
+            int pairsNeeded = cardCount / 2;
+
+            List<Sprite> shuffledSprites = new List<Sprite>(_cardSprites);
+            ShuffleUtility.Shuffle(shuffledSprites);
+
+            for (int i = 0; i < pairsNeeded; i++)
+            {
+                Sprite sprite = shuffledSprites[i];
+                dataList.Add(new CardData(i, sprite));
+                dataList.Add(new CardData(i, sprite));
+            }
+            // Setup grid based on card count
+            _dynamicGridManager.SetupGrid(dataList.Count);
+            ShuffleUtility.Shuffle(dataList);
+            // Spawn cards
+            foreach (var data in dataList)
+            {
+                CardView view = Instantiate(_cardPrefab, _dynamicGridManager.transform);
+                CardController controller = new CardController(data, view);
+                controller.OnSelected += OnCardSelected;
+                _cards.Add(controller);
+            }
+        }
+        private void OnCardSelected(CardController selected)
+        {
+            if (_firstCard == null)
+            {
+                _firstCard = selected;
+            }
+            else if (_secondCard == null)
+            {
+                _secondCard = selected;
+                StartCoroutine(CheckMatch());
+            }
+        }
+
+        private IEnumerator CheckMatch()
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            if (_firstCard.model.id == _secondCard.model.id)
+            {
+                _firstCard.SetMatched();
+                _secondCard.SetMatched();
+            }
+            else
+            {
+                _firstCard.FlipDown();
+                _secondCard.FlipDown();
+            }
+
+            _firstCard = null;
+            _secondCard = null;
+
+            if (_cards.TrueForAll(c => c.model.isMatched))
+            {
+                Debug.Log("You Won!");
+                OnGameWonEvent?.Invoke();
+            }
+
         }
     }
 }
