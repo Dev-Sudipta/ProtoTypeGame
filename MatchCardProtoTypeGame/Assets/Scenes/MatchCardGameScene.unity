@@ -1114,7 +1114,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &835229225
 MonoBehaviour:
@@ -1163,8 +1163,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1558,8 +1558,8 @@ MonoBehaviour:
   _sfxSource: {fileID: 655520458}
   _flipClip: {fileID: 8300000, guid: 16347ef65e3576640ad5e35ac310656b, type: 3}
   _matchClip: {fileID: 8300000, guid: d5d3cfa69b8f8e74da6b3c5a495a7032, type: 3}
-  _mismatchClip: {fileID: 8300000, guid: 4eddc424fb3f29f4facf894a9d3773d7, type: 3}
-  _gameOverClip: {fileID: 8300000, guid: 371bc5b0c4a54ee4f9fd08a8e7f16752, type: 3}
+  _mismatchClip: {fileID: 8300000, guid: 3b9c3aaba4ecc724ab3513abc7c480a7, type: 3}
+  _gameOverClip: {fileID: 8300000, guid: 066870c31187da141a82b60fe56fb23e, type: 3}
   _gamewinClip: {fileID: 8300000, guid: 55acd7519fb43644d8c106a53ec8644a, type: 3}
 --- !u!4 &1406732450
 Transform:
@@ -1608,22 +1608,22 @@ MonoBehaviour:
   _gridParent: {fileID: 1671805701}
   _cardPrefab: {fileID: 5745963123403273517, guid: 770a612e0c4bc9b488b02d7c42ce626b, type: 3}
   _cardSprites:
-  - {fileID: 225832695, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: 1941843073, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: -1164442202, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: -244266372, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: 1180318865, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: 1239919464, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: 376026312, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: -1853022483, guid: 50858fd27815f634e9940470eb95d74c, type: 3}
-  - {fileID: 1102340237, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: 1067389810, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: -1382301127, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: -1770964425, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: -458236274, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: -753686192, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: -1788008207, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
-  - {fileID: 769893696, guid: c9e77ab6666067c4a91e7ffa86ff34ce, type: 3}
+  - {fileID: -987377884, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: 1974318841, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: -12212340, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: -1262602378, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: -485659652, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: -1995826865, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: 1555026649, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: 1876968286, guid: 81a9a0691c570244bb2b08fa131ff07f, type: 3}
+  - {fileID: -1307302193, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: -328075250, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: 697137042, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: 91710866, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: 1142878273, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: -1964694051, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: 2115666596, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
+  - {fileID: -2034355901, guid: 3113b0af28589a745af836791fca0c7e, type: 3}
   _dynamicGridManager: {fileID: 1671805705}
   _gameDuration: 45
 --- !u!4 &1429739811
@@ -1658,7 +1658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1483896523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1957,7 +1957,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 900, y: 800}
+  m_SizeDelta: {x: 900, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671805702
 MonoBehaviour:
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 8, y: 8}
-  m_Constraint: 0
+  m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &1671805703
 MonoBehaviour:
@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.47058824, g: 0.30588236, b: 0.2, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

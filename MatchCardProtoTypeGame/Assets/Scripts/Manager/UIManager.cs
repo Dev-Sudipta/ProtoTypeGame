@@ -65,7 +65,7 @@ namespace MatchCard
             StartCoroutine(GameOver());
             _menuPage.SetActive(false);
             _gameWonPage.SetActive(false);
-            SoundManager.Instance.PlayGameOverSound();
+           
         }
         void ShowGameWon()
         {
@@ -73,13 +73,14 @@ namespace MatchCard
             _menuPage.SetActive(false);
             _gameOverPage.SetActive(false);
           
-            SoundManager.Instance.PlayGameWinSound();
+           
         }
 
         private IEnumerator GameWin()
         {
             yield return new WaitForSeconds(1.5f);
             Debug.Log("Coroutine called");
+            SoundManager.Instance.PlayGameWinSound();
             _gameplayPage.SetActive(false);
             _gameWonPage.SetActive(true);
         }
@@ -87,6 +88,7 @@ namespace MatchCard
         {
             yield return new WaitForSeconds(1.5f);
             Debug.Log("Coroutine called");
+            SoundManager.Instance.PlayGameOverSound();
             _gameplayPage.SetActive(false);
             _gameOverPage.SetActive(true);
         }

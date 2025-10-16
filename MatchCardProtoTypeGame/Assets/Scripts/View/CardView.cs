@@ -59,8 +59,17 @@ namespace MatchCard
             seq.Append(transform.DOScale(_matchScale, 0.15f).SetEase(Ease.OutBack))
                .Append(transform.DOScale(1f, 0.15f).SetEase(Ease.InOutSine));
         }
-        public void ShowFront() { _front.SetActive(true); _back.SetActive(false); }
-        public void ShowBack() { _front.SetActive(false); _back.SetActive(true); }
+        public void ShowFront(System.Action onComplete = null)
+        {
+            _front.SetActive(true);
+            _back.SetActive(false);
+             onComplete?.Invoke();
+        }
+        public void ShowBack() 
+        { 
+            _front.SetActive(false);
+            _back.SetActive(true); 
+        }
     }
 }
 

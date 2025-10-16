@@ -29,8 +29,13 @@ namespace MatchCard
             float cellWidth = totalWidth / columns;
             float cellHeight = totalHeight / rows;
 
-            _gridLayout.cellSize = new Vector2(cellWidth, cellHeight);
+            float size = Mathf.Min(cellWidth, cellHeight); // ensures square cards
+
+            _gridLayout.cellSize = new Vector2(size, size);
             _gridLayout.spacing = new Vector2(_spacing, _spacing);
+
+            _gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            _gridLayout.constraintCount = columns;
         }
 
     }

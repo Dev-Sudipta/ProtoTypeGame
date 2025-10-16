@@ -22,6 +22,7 @@ namespace MatchCard
         private int turns;
         private float _remainingTime;
         private bool _isGameOver = false;
+        private readonly List<CardController> _flippedCards = new();
         public int Score => score;
         public int Turns => turns;
         public static event System.Action<float> OnTimeChanged;
@@ -163,6 +164,7 @@ namespace MatchCard
             }
             else
             {
+                SoundManager.Instance.PlayMismatchSound();
                 _firstCard.FlipDown();
                 _secondCard.FlipDown();
             }
