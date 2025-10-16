@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+
 
 namespace MatchCard
 {
@@ -12,26 +13,43 @@ namespace MatchCard
         [SerializeField] private CardView _cardPrefab;
         [SerializeField] private Sprite[] _cardSprites;
         [SerializeField] private DynamicGridManager _dynamicGridManager;
-
+        [SerializeField] private float _gameDuration = 60f; // total time in seconds
         private List<CardController> _cards = new List<CardController>();
         private CardController _firstCard, _secondCard;
         public event System.Action OnGameWonEvent;
         private bool _isPreviewing = true;
         private int score;
         private int turns;
+        private float _remainingTime;
+        private bool _isGameOver = false;
         public int Score => score;
-        public int Turns => turns;  
+        public int Turns => turns;
+        public static event System.Action<float> OnTimeChanged;
+        public static event System.Action OnGameOver;
         // Start is called before the first frame update
 
         public void StartGame()
         {
+            _remainingTime = _gameDuration;
             LoadGameData();
             _cards.Clear();
             CreateCards();
             StartCoroutine(PreviewAndShuffleRoutine(0.5f));
             UIManager.OncardFlip?.Invoke(score);
         }
+        void Update()
+        {
+            if (_isGameOver || _isPreviewing) return;
 
+            _remainingTime -= Time.deltaTime;
+           OnTimeChanged?.Invoke(_remainingTime);
+
+            if (_remainingTime <= 0f)
+            {
+                _remainingTime = 0f;
+                OnGameOver?.Invoke();
+            }
+        }
         public void ClearCards()
         {
             foreach (Transform child in _gridParent)
@@ -117,6 +135,7 @@ namespace MatchCard
         private void OnCardSelected(CardController selected)
         {
             if (_isPreviewing) return;
+            SoundManager.Instance.PlayFlipSound();
             if (_firstCard == null)
             {
                 _firstCard = selected;
@@ -134,8 +153,10 @@ namespace MatchCard
 
             if (_firstCard.model.id == _secondCard.model.id)
             {
+               
                 _firstCard.SetMatched();
                 _secondCard.SetMatched();
+                SoundManager.Instance.PlayMatchSound();
                 score += 10;
                 UIManager.OncardFlip?.Invoke(score);
                 SaveGameData();
