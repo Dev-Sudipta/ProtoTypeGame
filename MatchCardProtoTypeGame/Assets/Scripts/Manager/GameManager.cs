@@ -157,7 +157,7 @@ namespace MatchCard
                 _firstCard.SetMatched();
                 _secondCard.SetMatched();
                 SoundManager.Instance.PlayMatchSound();
-                score += 10;
+                score += 2;
                 UIManager.OncardFlip?.Invoke(score);
                 SaveGameData();
             }

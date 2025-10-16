@@ -21,6 +21,7 @@ namespace MatchCard
             if (model.isFlipped || model.isMatched) return;
 
             model.isFlipped = true;
+            view.ShowFrontAnimated();
             view.ShowFront();
             OnSelected?.Invoke(this);
         }
@@ -28,12 +29,14 @@ namespace MatchCard
         public void FlipDown()
         {
             model.isFlipped = false;
+            view.ShowBackAnimated();
             view.ShowBack();
         }
 
         public void SetMatched()
         {
             model.isMatched = true;
+            view.PlayMatchAnimation();
         }
     }
 

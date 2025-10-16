@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Unity.VisualScripting;
+using System.Collections;
 namespace MatchCard
 {
     public class UIManager : MonoBehaviour
@@ -61,21 +62,34 @@ namespace MatchCard
         }
         void ShowGameOver()
         {
+            StartCoroutine(GameOver());
             _menuPage.SetActive(false);
-            _gameplayPage.SetActive(false);
             _gameWonPage.SetActive(false);
-            _gameOverPage.SetActive(true);
             SoundManager.Instance.PlayGameOverSound();
         }
         void ShowGameWon()
         {
+            StartCoroutine(GameWin());
             _menuPage.SetActive(false);
-            _gameplayPage.SetActive(false);
             _gameOverPage.SetActive(false);
-            _gameWonPage.SetActive(true);
+          
             SoundManager.Instance.PlayGameWinSound();
         }
 
+        private IEnumerator GameWin()
+        {
+            yield return new WaitForSeconds(1.5f);
+            Debug.Log("Coroutine called");
+            _gameplayPage.SetActive(false);
+            _gameWonPage.SetActive(true);
+        }
+        private IEnumerator GameOver()
+        {
+            yield return new WaitForSeconds(1.5f);
+            Debug.Log("Coroutine called");
+            _gameplayPage.SetActive(false);
+            _gameOverPage.SetActive(true);
+        }
         public void StartGame()
         {
             ShowGameplay();
@@ -88,6 +102,7 @@ namespace MatchCard
             _gameManager.StartGame();
             _gameplayPage.SetActive(true);
             _gameWonPage.SetActive(false);
+            _gameOverPage.SetActive(false);
         }
 
         private void OnDestroy()
